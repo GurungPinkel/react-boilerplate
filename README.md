@@ -21,10 +21,6 @@ In Phase 1, We set up only the bare essentials for webpack, typescript and react
 
             ```npm init --y```
 
----
-
----
-
 1. Add packages (react / typescript/ webpack) 
     ```@babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript @types/node @types/react @types/react-dom babel-loader copy-webpack-plugin html-webpack-plugin terser-webpack-plugin typescript webpack webpack-cli webpack-dev-server webpack-merge```
 
@@ -160,28 +156,28 @@ In Phase 1, We set up only the bare essentials for webpack, typescript and react
         const commonConfig = require('./common');
 
         const localConfig = {
-        mode: 'development',
-        devtool: 'source-map',
-        devServer: {
-            open: true,
-            port: 5000,
-            liveReload: true,
-            hot: true,
-            http2: true,
-            historyApiFallback: true // support for react-router
-        },
-        plugins: [
-            new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '..', './public/index.html')
-            })
-        ],
-        output: {
-            path: path.resolve(__dirname, '..', './dist'),
-            publicPath: '/',
-            filename: 'bundle.[contenthash:8].js'
-        }
+            mode: 'development',
+            devtool: 'source-map',
+            devServer: {
+                open: true,
+                port: 5000,
+                liveReload: true,
+                hot: true,
+                http2: true,
+                historyApiFallback: true // support for react-router
+            },
+            plugins: [
+                new HtmlWebpackPlugin({
+                template: path.resolve(__dirname, '..', './public/index.html')
+                })
+            ]
         };
 
         module.exports = merge(commonConfig, localConfig);
 
         ```
+---
+
+---
+
+1. 

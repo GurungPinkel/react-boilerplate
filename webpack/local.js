@@ -19,12 +19,7 @@ const localConfig = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '..', './public/index.html')
     })
-  ],
-  output: {
-    path: path.resolve(__dirname, '..', './dist'),
-    publicPath: '/',
-    filename: 'bundle.[contenthash:8].js'
-  }
+  ]
 };
 
 module.exports = merge(commonConfig, localConfig);
