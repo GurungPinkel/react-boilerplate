@@ -101,3 +101,6 @@ dist
 
 #OSX
 .DStore
+
+# App specific
+.env.development.local

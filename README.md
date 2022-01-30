@@ -52,6 +52,11 @@ In Phase 1, We set up only the bare essentials for webpack, typescript and react
     ```
     "compilerOptions": {
         "target": "es2016",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
         "jsx": "react-jsx",
         "module": "commonjs",
         "resolveJsonModule": true,
@@ -313,3 +318,44 @@ In Phase 2, We will add and configure prettier, eslint(airbnb) and lint-staged.
               "*.{js,jsx,ts,tsx,css,scss,md}": "prettier --write"
           }
       ```
+
+## Phase 3
+
+1. Add webpack support for dotenv
+
+   1. Create 3 different dotenv files.
+      1. .env.production - Used for production environment
+      2. .env.development - Used for dev environment
+      3. .env.development.local - Used for local development. Do not commit to git. Add this file in .gitignore
+   1. Install dotenv
+
+      `npm i dotenv`
+
+   1. Update [webpack/local.js](./webpack/local.js)
+
+      1. Add the following:
+
+         ```
+             const dotenv = require('dotenv');
+         ```
+
+         ```
+             const env = dotenv.config( {
+             path: path.join(__dirname, '..', '.env.development.local')
+             } ).parsed;
+
+             const envKeys = Object.keys(env).reduce((prev, next) => {
+             // eslint-disable-next-line no-param-reassign
+             prev[`process.env.${next}`] = JSON.stringify(env[next])
+
+             return prev
+             }, {})
+         ```
+
+         ```
+             plugins: [
+                 .....
+                 ...
+                 new webpack.DefinePlugin(envKeys)
+             ]
+         ```
