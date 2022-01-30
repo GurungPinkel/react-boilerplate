@@ -1,9 +1,3 @@
-const App = ():JSX.Element => {
-    return (
-        <>
-            React Boilerplate 
-        </>
-    )
-}
+const App = (): JSX.Element => <>React Boilerplate</>;
 
-export {App}
+export { App };
