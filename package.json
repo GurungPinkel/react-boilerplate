@@ -9,7 +9,9 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build": "NODE_ENV=PRODUCTION webpack --config webpack/production.js",
+    "analyze": "webpack-bundle-analyzer --port 8888 dist/stats.json"
   },
   "repository": {
     "type": "git",
@@ -36,6 +38,7 @@
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.3",
     "css-loader": "^6.5.1",
+    "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^8.8.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
@@ -52,6 +55,7 @@
     "postcss-loader": "^6.2.1",
     "postcss-normalize": "^10.0.1",
     "postcss-preset-env": "^7.2.3",
+    "postcss-safe-parser": "^6.0.0",
     "prettier": "^2.5.1",
     "resolve-url-loader": "^5.0.0",
     "sass-loader": "^12.4.0",
@@ -59,6 +63,7 @@
     "terser-webpack-plugin": "^5.3.0",
     "typescript": "^4.5.5",
     "webpack": "^5.67.0",
+    "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.3",
     "webpack-merge": "^5.8.0"

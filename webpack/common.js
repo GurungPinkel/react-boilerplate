@@ -21,6 +21,11 @@ module.exports = {
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             type: 'asset',
+            parser: {
+              dataUrlCondition: {
+                maxSize: 5 * 1024 // Images less than 5kb will be inline
+              }
+            },
             generator: {
               filename: 'static/images/[name].[hash:8][ext]'
             }
