@@ -2,13 +2,13 @@
 
 Production quality custom REACT application using webpack5
 
-## How to use
+# How to use
 
-## Features
+# Features
 
-## Upcomming features
+# Upcomming features
 
-## Steps to recreate this project.
+# Steps to recreate this project.
 
 The steps have been broken down in multiple phases to add support for different features.
 
