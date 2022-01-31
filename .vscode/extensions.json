@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "formulahendry.auto-rename-tag",
+    "mgmcdermott.vscode-language-babel",
+    "pkief.material-icon-theme",
+    "VisualStudioExptTeam.vscodeintellicode",
+    "abusaidm.html-snippets",
+    "sdras.night-owl",
+    "wix.vscode-import-cost"
+  ]
+}

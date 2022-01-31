@@ -104,3 +104,10 @@ dist
 
 # App specific
 .env.development.local
+
+
+#Temporarily ignore
+images/
+*.css
+*.scss
+*.sass

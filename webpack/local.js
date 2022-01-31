@@ -16,13 +16,10 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
   return prev;
 }, {});
 
-console.log(envKeys, 'envKeys');
-
 const localConfig = {
   mode: 'development',
   devtool: 'source-map',
   devServer: {
-    open: true,
     port: 5000,
     liveReload: true,
     hot: true,

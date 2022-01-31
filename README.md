@@ -359,3 +359,276 @@ In Phase 2, We will add and configure prettier, eslint(airbnb) and lint-staged.
                  new webpack.DefinePlugin(envKeys)
              ]
          ```
+
+## Phase 4
+
+1. Add support for types which are not supported by default.
+
+   1. Create a file [src/declarations.d.ts](./src/declarations.d.ts)
+
+1. Add webpack loaders for:
+
+   1. images : Add the following in [webpack/common.js](./webpack/common.js):
+
+      ```
+      module: {
+          rules: [
+          {
+              oneOf: [
+              ....
+              ...
+              .
+                  {
+                      test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+                      type: 'asset',
+                      generator: {
+                      filename: 'static/images/[name].[hash:8][ext]'
+                      }
+                  },
+                  {
+                      test: /\.svg/,
+                      type: 'asset/inline'
+                  },
+              ]
+          }
+          ]
+      }
+      ```
+
+   1. css, scss, css modules:
+
+      1. Add the following dependencies:
+
+         `npm i -D mini-css-extract-plugin style-loader css-loader postcss-loader postcss-flexbugs-fixes postcss-preset-env autoprefixer postcss-normalize resolve-url-loader sass-loader node-sass postcss-safe-parser`
+
+      1. Add the following in [webpack/common.js](./webpack/common.js):
+
+      ```
+        const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+        const postcssNormalize = require('postcss-normalize');
+
+        const cssRegex = /\.css$/;
+        const cssModuleRegex = /\.module\.css$/;
+        const sassRegex = /\.(scss|sass)$/;
+        const sassModuleRegex = /\.module\.(scss|sass)$/;
+        const isProduction = process.env.NODE_ENV === 'PRODUCTION';
+      ```
+
+      ```
+      module: {
+        rules: [
+        {
+            oneOf: [
+            ....
+            ...
+            .
+                {
+                    test: cssRegex,
+                    exclude: cssModuleRegex,
+                    use: [
+                    {
+                        loader: isProduction ? MiniCssExtractPlugin.loader : 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                        importLoaders: 1,
+                        sourceMap: isProduction
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                        postcssOptions: {
+                            plugins: [
+                            ['postcss-flexbugs-fixes'],
+                            [
+                                'postcss-preset-env',
+                                {
+                                autoprefixer: {
+                                    flexbox: 'no-2009'
+                                },
+                                stage: 3
+                                }
+                            ],
+                            postcssNormalize()
+                            ]
+                        },
+                        sourceMap: isProduction
+                        }
+                    }
+                    ],
+                    // Don't consider CSS imports dead code even if the
+                    // containing package claims to have no side effects.
+                    // Remove this when webpack adds a warning or an error for this.
+                    // See https://github.com/webpack/webpack/issues/6571
+                    sideEffects: true
+                },
+                {
+                    test: cssModuleRegex,
+                    use: [
+                    {
+                        loader: isProduction ? MiniCssExtractPlugin.loader : 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                        importLoaders: 1,
+                        sourceMap: isProduction,
+                        modules: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                        postcssOptions: {
+                            plugins: [
+                            ['postcss-flexbugs-fixes'],
+                            [
+                                'postcss-preset-env',
+                                {
+                                autoprefixer: {
+                                    flexbox: 'no-2009'
+                                },
+                                stage: 3
+                                }
+                            ],
+                            postcssNormalize()
+                            ]
+                        },
+                        sourceMap: isProduction
+                        }
+                    }
+                    ]
+                },
+                {
+                    test: sassRegex,
+                    exclude: sassModuleRegex,
+                    use: [
+                    {
+                        loader: isProduction ? MiniCssExtractPlugin.loader : 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                        importLoaders: 2,
+                        sourceMap: isProduction
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                        postcssOptions: {
+                            plugins: [
+                            ['postcss-flexbugs-fixes'],
+                            [
+                                'postcss-preset-env',
+                                {
+                                autoprefixer: {
+                                    flexbox: 'no-2009'
+                                },
+                                stage: 3
+                                }
+                            ],
+                            postcssNormalize()
+                            ]
+                        },
+                        sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'resolve-url-loader',
+                        options: {
+                        sourceMap: isProduction
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                        sourceMap: true
+                        }
+                    }
+                    ],
+                    // Don't consider CSS imports dead code even if the
+                    // containing package claims to have no side effects.
+                    // Remove this when webpack adds a warning or an error for this.
+                    // See https://github.com/webpack/webpack/issues/6571
+                    sideEffects: true
+                },
+                {
+                    test: sassModuleRegex,
+                    use: [
+                    {
+                        loader: isProduction ? MiniCssExtractPlugin.loader : 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                        importLoaders: 3,
+                        sourceMap: isProduction,
+                        modules: true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                        postcssOptions: {
+                            plugins: [
+                            ['postcss-flexbugs-fixes'],
+                            [
+                                'postcss-preset-env',
+                                {
+                                autoprefixer: {
+                                    flexbox: 'no-2009'
+                                },
+                                stage: 3
+                                }
+                            ],
+                            postcssNormalize()
+                            ]
+                        },
+                        sourceMap: isProduction
+                        }
+                    },
+                    {
+                        loader: 'resolve-url-loader',
+                        options: {
+                        sourceMap: isProduction
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                        sourceMap: true
+                        }
+                    }
+                    ]
+                }
+            ]
+        }
+        ]
+      }
+      ```
+
+   1. Fonts: Add the following in [webpack/common.js](./webpack/common.js)
+
+      ```
+      module: {
+        rules: [
+            {
+                oneOf: [
+                    ....
+                    ...
+                    .
+                    {
+                        test: /\.(woff(2)?|eot|ttf|otf)$/,
+                        type: 'asset/resource',
+                        generator: {
+                        filename: 'static/fonts/[name][ext]'
+                        }
+                    }
+                ]
+            }
+        ]
+      }
+      ```
