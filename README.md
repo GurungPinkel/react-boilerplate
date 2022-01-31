@@ -1,12 +1,22 @@
 # react-boilerplate
 
-Production quality custom REACT application using webpack5
-
-# How to use
+Custom REACT application using webpack5
 
 # Features
 
+This project is intended to serve as a boilerplate when creating a new react-application. Currently this project provide the following tools/features:
+
+1. TypeScript
+1. dotenv
+1. webpack
+   1. optimized for production build
+1. eslint
+1. prettier
+1. lint-staged
+
 # Upcomming features
+
+1. N/A
 
 # Steps to recreate this project.
 
