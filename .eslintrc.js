@@ -70,6 +70,7 @@ module.exports = {
       { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] }
     ],
     'react/prop-types': 'off', // Since we do not use prop-types
-    'react/require-default-props': 'off' // Since we do not use prop-types
+    'react/require-default-props': 'off', // Since we do not use prop-types
+    'react/jsx-props-no-spreading': 'off' // Allow jsx props spread
   }
 };
