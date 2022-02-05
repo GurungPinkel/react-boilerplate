@@ -100,7 +100,7 @@ node_modules/
 dist
 
 #OSX
-.DStore
+.DS_Store
 
 # App specific
 .env.development.local
