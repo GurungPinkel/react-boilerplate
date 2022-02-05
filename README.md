@@ -656,7 +656,7 @@ In Phase 2, We will add and configure prettier, eslint(airbnb) and lint-staged.
 
 ## Phase 5
 
-Add support for webpack production config.
+Add support for webpack production config and docker.
 
 1. Install the following dependencies:
 
@@ -666,16 +666,28 @@ Add support for webpack production config.
 
 1. update script section in [package.json](./package.json)
 
-```
-"scripts": {
-    ....
-    ..
-    "start": "NODE_ENV=development webpack serve --config webpack/local.js",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "npm run lint -- --fix",
-    "prettier": "prettier --write .",
-    "prepare": "husky install",
-    "build": "NODE_ENV=PRODUCTION webpack --config webpack/production.js",
-    "analyze": "webpack-bundle-analyzer --port 8888 dist/stats.json",
-  },
-```
+   ```
+   "scripts": {
+       ....
+       ..
+       "start": "NODE_ENV=development webpack serve --config webpack/local.js",
+       "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+       "lint:fix": "npm run lint -- --fix",
+       "prettier": "prettier --write .",
+       "prepare": "husky install",
+       "build": "NODE_ENV=PRODUCTION webpack --config webpack/production.js",
+       "analyze": "webpack-bundle-analyzer --port 8888 dist/stats.json",
+   },
+   ```
+
+1. Create [Dockerfile](./Dockerfile) file
+1. Create [docker-compose.yml](./docker-compose.yml) file
+1. update [package.json](./package.json) script section to include the following:
+   ```
+    scripts{
+        ....
+        ..
+        "docker:build": "docker-compose up --build",
+        "docker": "docker-compose up"
+    }
+   ```

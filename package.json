@@ -11,8 +11,10 @@
     "prettier": "prettier --write .",
     "prepare": "husky install",
     "build": "NODE_ENV=PRODUCTION webpack --config webpack/production.js",
-    "build:dev": "NODE_ENV=PRODUCTION webpack --config webpack/development.js",
-    "analyze": "webpack-bundle-analyzer --port 8888 dist/stats.json"
+    "build:dev": "NODE_ENV=DEVELOPMENT webpack --config webpack/development.js",
+    "analyze": "webpack-bundle-analyzer --port 8888 dist/stats.json",
+    "docker:build": "docker-compose up --build",
+    "docker": "docker-compose up"
   },
   "repository": {
     "type": "git",
@@ -75,8 +77,8 @@
     "react-dom": "^17.0.2"
   },
   "engines": {
-    "node": "16.13.0",
-    "npm": "8.1.0"
+    "node": "16.13.2",
+    "npm": "8.1.2"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
