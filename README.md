@@ -28,12 +28,17 @@ In Phase 1, We set up only the bare essentials for webpack, typescript and react
 
 1.  Initalize package.json
 
-            ```npm init --y```
+    `npm init --y`
 
 1.  Add packages (react / typescript/ webpack)
-    `@babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript @types/node @types/react @types/react-dom babel-loader copy-webpack-plugin html-webpack-plugin terser-webpack-plugin typescript webpack webpack-cli webpack-dev-server webpack-merge`
 
-    `npm i react react-dom`
+    ```
+    npm i -D @babel/core @babel/preset-env @babel/preset-react @babel/preset-typescript @types/node @types/react @types/react-dom babel-loader copy-webpack-plugin html-webpack-plugin terser-webpack-plugin typescript webpack webpack-cli webpack-dev-server webpack-merge
+    ```
+
+    ```
+    npm i react react-dom
+    ```
 
 1.  Create `.babelrc` file with the following content
 
